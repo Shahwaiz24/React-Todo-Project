@@ -1,17 +1,12 @@
 import React, { useState } from "react";
-import { useTodoContext } from "../context/Todo-Context";
 
 function TodoForm() {
-const TodoContext = useTodoContext();
-const {addTodo} = TodoContext;
 const [inputText, setInputText] = useState("");
 
 const handleInputChange = (e) => {
     setInputText(e.target.value);
 };
-const addTodotask = (e) => {
-    addTodo(e.target.value);
-};
+
 
 
     return (
