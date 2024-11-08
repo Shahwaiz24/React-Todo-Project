@@ -1,25 +1,41 @@
 import React, { useState } from "react";
+// import { TodoProvider, useTodoContext } from "./context/index.js"
+import { useTodoContext } from "../context/index.js"
 
-function TodoForm({addTodoTask}) {
-const [inputText, setInputText] = useState("");
+function TodoForm() {
+    const [todo, setTodo] = useState("");
 
-const handleInputChange = (e) => {
-    setInputText(e.target.value);
-    console.log("Todo: " ,inputText)
-};
+    
+    const handleInputChange = (e) => {
+    setTodo(e.target.value);
+    // console.log("Todo: " ,todo)
+    };
+    const {addTodo} = useTodoContext();
+    const addTodoTask = (e) => {
+        if (!todo) return
+        
+        
+            addTodo({ title: e, completed: false })
+            // console.log("Todo: ", todo)
+            setTodo("")
+        
+    }
 
 
 
     return (
-        <form className="flex">
+        <form onSubmit={(e) => {
+            e.preventDefault(); 
+            addTodoTask(todo);
+        }} className="flex">
             <input
                 type="text"
-                value={inputText}
+                value={todo}
                 onChange={(e)=> handleInputChange(e)}
                 placeholder="Write Todo..."
                 className="w-full border border-black/10 rounded-l-lg px-3 outline-none duration-150 bg-white/20 py-1.5"
             />
-            <button value={inputText} onChange={(e) => addTodoTask(todoAdd={inputText})} type="button" className="rounded-r-lg px-3 py-1 bg-green-600 text-white shrink-0">
+            <button value={todo} type="submit" className="rounded-r-lg px-3 py-1 bg-green-600 text-white shrink-0">
                 Add
             </button>
         </form>
