@@ -10,7 +10,7 @@ function TodoItem({ todo }) {
 
     const { updateTodo, deleteTodo, completeTodo } = useTodoContext();
     const editTodo = async () => {
-       await updateTodo(todo.id, todoTitle);
+    updateTodo(todo.id, todoTitle);
         setIsTodoEditable(false);
     }
     const completedTodo = () => {

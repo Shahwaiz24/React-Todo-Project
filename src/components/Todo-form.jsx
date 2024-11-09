@@ -12,11 +12,11 @@ function TodoForm() {
     };
     const {addTodo} = useTodoContext();
     const addTodoTask = (e) => {
+        e.preventDefault(); 
         if (!todo) return
-        
-        
-            addTodo({ title: e, completed: false })
-            // console.log("Todo: ", todo)
+        addTodo({title: todo.toString(), completed: false })
+      
+        //   console.log( "Todo:",))
             setTodo("")
         
     }
@@ -24,10 +24,7 @@ function TodoForm() {
 
 
     return (
-        <form onSubmit={(e) => {
-            e.preventDefault(); 
-            addTodoTask(todo);
-        }} className="flex">
+        <form onSubmit={(e) => addTodoTask(e)} className="flex">
             <input
                 type="text"
                 value={todo}

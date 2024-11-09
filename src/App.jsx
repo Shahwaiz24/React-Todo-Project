@@ -6,14 +6,11 @@ import TodoItem from './components/Todo-items';
 
 function App() {
 
-  const [todo, setTodo] = useState([]);
+  const [todo, setTodo] = useState(JSON.parse(localStorage.getItem("TodoTask")) || []);
   
-  const addTodo = ({todoAdd}) => {
-    setTodo((prev) => [...prev, { "id": Math.floor(Math.random()), ...todoAdd }])
-    todo.map((e) => {
-      console.log("Each Todo: ", e)
-    })
-    // console.log("Todo : ",todo.)
+  const addTodo = (todoAdd) => {
+    setTodo((prev) => [...prev, { id: Math.floor(Math.random() * 100) +1, ...todoAdd }])
+    
   }
 
   const updateTodo = (id, title) => {
@@ -42,12 +39,20 @@ function App() {
   };
 
   useEffect(() => {
-    setTodo(JSON.parse(localStorage.getItem("todos")) || []);
+    // setTodo(JSON.parse(localStorage.getItem("TodoTask")));
+    console.log("Todo Local: ",todo)
   }, [])
   
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todo));
-  }, [todo])
+  useEffect(  () => {
+    try {
+     localStorage.setItem("TodoTask", JSON.stringify(todo));
+      console.log("Todo Saved",localStorage.getItem("TodoTask"));
+
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }, [todo,setTodo])
 
   return (
     <>
